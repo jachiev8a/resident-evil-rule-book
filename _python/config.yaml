@@ -11,12 +11,15 @@ structure:
     title: "Setup Inicial"
     go_back: true
     contents:
+      # [sub]
       tanda_1:
         go_back: true
         readme: "t1"
+      # [sub]
       tanda_2:
         go_back: true
         readme: "t2"
+      # [sub]
       tanda_3:
         go_back: true
         readme: "t3"
@@ -26,24 +29,32 @@ structure:
     title: "Personajes & Tiers"
     go_back: true
     contents:
+      # [sub]
       tier_S:
         go_back: true
-        readme: "t s"
+        readme: "{img:char_tier_s_list.jpg}"
+      # [sub]
       tier_A:
         go_back: true
         readme: "t a"
+      # [sub]
       tier_B:
         go_back: true
         readme: "t b"
+      # [sub]
       banlist:
         go_back: true
-        readme: "Barry is here\n\n{img:barry_fake.jpg}"
+        readme: | 
+          > Barry esta baneado porque facilmente puede hacer +100 por turno.
+          Y ocasionalmente puede hacer doble o triple exploracion. Rompe Juegos.
+          \n\n{img:char_barry_banned.jpg}
 
   # [main: armas]
   armas:
     title: "Armas"
     go_back: true
     contents:
+      # [sub]
       limited:
         go_back: true
         readme: "armas limitadas"
@@ -53,14 +64,39 @@ structure:
     title: "Reglas de Mansion"
     go_back: true
     contents:
+      # [sub]
       specific_rules:
         title: "Reglas Especificas de Monstruos"
         go_back: true
         contents:
+          # [sub]
           grillo:
             go_back: true
             readme: | 
               > Cuando el grillo es revelado, te quita una carta attachada cualquiera,
               si son 2 o mas cartas attachadas, se quita una al azar.
-              (ejemplo: plantas amarillas, mapa, etc)\n\n{img:grillo.jpg}
+              (ejemplo: plantas amarillas, mapa, etc)\n\n{img:monster_grillo.jpg}
 
+  # [main: reglas en general]
+  general_rules:
+    title: "Reglas En General"
+    go_back: true
+    contents:
+      # [sub]
+      infection:
+        go_back: true
+        readme: |
+          > El nivel de infeccion total es [3]. Si llegas a ese limite, pierdes la vida actual.
+          Se procedera a continuar con el siguiente CONTINUE (si todavia hay)
+          vida llena, infeccion en 0 y fichas maricas correspondientes.
+
+  # [main: discusiones]
+  discussions:
+    title: "Discusiones"
+    go_back: true
+    contents:
+    # [sub]
+    infection_level:
+      title: "Nivel de Infeccion 3 o 4"
+      go_back: true
+      readme: ""
