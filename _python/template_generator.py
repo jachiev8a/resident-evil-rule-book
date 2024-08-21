@@ -19,6 +19,7 @@ class ConfigNodeBaseClass:
     def __init__(self, node_name: str, config_data: dict, index: int = 0):
         self.index = index
         self.node_name = node_name
+        self.node_name_human_readable = (node_name[0].upper() + node_name[1:]).replace('_', ' ')
         self.go_back = config_data.get("go_back")
         self.is_final_dir = config_data.get("is_final_dir")
         self.readme = config_data.get("readme", None)
@@ -64,6 +65,8 @@ class ConfigNodeBaseClass:
         with open(f"{self.directory_path}/README.md", "w") as f:
             if self.go_back:
                 f.write(self._get_go_back_template())
+            if self.is_final_dir:
+                f.write(f"\n## {self.node_name_human_readable}\n\n")
             f.write(f"{self.readme}\n\n")
 
 
@@ -91,7 +94,7 @@ class ConfigParentNode(ConfigNodeBaseClass):
             )
             config_child_node.generate()
             self.table_of_contents.append(
-                f"- ### [{config_child_node.node_name.upper()}]"
+                f"- ### [{config_child_node.node_name_human_readable.upper()}]"
                 f"({config_child_node.relative_path}/README.md)\n"
             )
         self.generate_table_of_contents()
