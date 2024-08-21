@@ -7,7 +7,7 @@ MAIN_CONFIG_DATA = get_config_data()
 
 
 TEMPLATE_HORIZONTAL_LINE = "---\n\n"
-TEMPLATE_GO_BACK = "### [<- ATRAS](../README.md)"
+TEMPLATE_GO_BACK = "## [<- ATRAS](../README.md)"
 
 REGEX_README_RESOURCE = re.compile(r'{(\w*):([\w.]*)}')
 
@@ -23,6 +23,7 @@ class ConfigNodeBaseClass:
         self.is_final_dir = config_data.get("is_final_dir")
         self.readme = config_data.get("readme", None)
         self.directory_path = f"{self.MAIN_PROJECT_PATH}/{self.index}0_{self.node_name}"
+        self.relative_path = self.directory_path.replace(f"{self.MAIN_PROJECT_PATH}/", '')
         self.contents = {}
         self._parse_readme_content()
 
@@ -35,7 +36,7 @@ class ConfigNodeBaseClass:
 
     def _parse_readme_content(self):
         if not self.readme:
-            self.readme = "EMPTY!"
+            self.readme = ""
             return
 
         resource_type = None
@@ -70,6 +71,13 @@ class ConfigParentNode(ConfigNodeBaseClass):
     def __init__(self, node_name: str, config_data: dict, index: int = 0):
         super().__init__(node_name, config_data, index)
         self.contents = config_data.get("contents")
+        self.table_of_contents = []
+
+    def generate_table_of_contents(self):
+        if self.table_of_contents:
+            self.readme = self.readme + 'CONTENIDO:\n\n'
+            self.readme = self.readme + ''.join(self.table_of_contents)
+
 
     def generate(self):
         print(f"Generating {self.node_name} directory...")
@@ -82,6 +90,11 @@ class ConfigParentNode(ConfigNodeBaseClass):
                 index=index,
             )
             config_child_node.generate()
+            self.table_of_contents.append(
+                f"- ### [{config_child_node.node_name.upper()}]"
+                f"({config_child_node.relative_path}/README.md)\n"
+            )
+        self.generate_table_of_contents()
         self.generate_readme()
 
 
@@ -91,6 +104,7 @@ class ConfigChildNode(ConfigNodeBaseClass):
         super().__init__(node_name, config_data, index)
         self.parent_dir = parent_dir
         self.directory_path = f"{self.parent_dir}/{self.index}0_{self.node_name}"
+        self.relative_path = self.directory_path.replace(f"{self.parent_dir}/", '')
 
     def generate(self):
         print(f"Generating [{self.node_name}] directory...")

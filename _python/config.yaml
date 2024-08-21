@@ -12,15 +12,15 @@ structure:
       tanda_1:
         go_back: true
         is_final_dir: true
-        readme: "xxx"
+        readme: "t1"
       tanda_2:
         go_back: true
         is_final_dir: true
-        readme: "xxx"
+        readme: "t2"
       tanda_3:
         go_back: true
         is_final_dir: true
-        readme: "xxx"
+        readme: "t3"
 
   # [main: personajes]
   personajes:
@@ -30,15 +30,15 @@ structure:
       tier_S:
         go_back: true
         is_final_dir: true
-        readme: "xxx"
+        readme: "t s"
       tier_A:
         go_back: true
         is_final_dir: true
-        readme: "xxx"
+        readme: "t a"
       tier_B:
         go_back: true
         is_final_dir: true
-        readme: "xxx"
+        readme: "t b"
       banlist:
         go_back: true
         is_final_dir: true
