@@ -70,6 +70,8 @@ class ConfigNode:
         if resource_type == 'img':
             img_resource_path = self._get_img_resource_path(resource_name)
             self.readme = re.sub(REGEX_README_RESOURCE, img_resource_path, self.readme)
+        # replace '\\n' with new line
+        self.readme = self.readme.replace('\\n', '\n')
 
     def _get_go_back_template(self):
         return (

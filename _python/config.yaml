@@ -59,5 +59,8 @@ structure:
         contents:
           grillo:
             go_back: true
-            readme: "grillo"
+            readme: | 
+              > Cuando el grillo es revelado, te quita una carta attachada cualquiera,
+              si son 2 o mas cartas attachadas, se quita una al azar.
+              (ejemplo: plantas amarillas, mapa, etc)\n\n{img:grillo.jpg}
 
