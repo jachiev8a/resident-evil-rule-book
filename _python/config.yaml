@@ -1,0 +1,45 @@
+add_index_numbers: true
+
+# main structure node. [!] DON'T CHANGE THIS NAME
+# just add your own structure inside this node.
+structure:
+
+  # [main: setup]
+  setup:
+    is_final_dir: false
+    go_back: true
+    contents:
+      tanda_1:
+        go_back: true
+        is_final_dir: true
+        readme: "xxx"
+      tanda_2:
+        go_back: true
+        is_final_dir: true
+        readme: "xxx"
+      tanda_3:
+        go_back: true
+        is_final_dir: true
+        readme: "xxx"
+
+  # [main: personajes]
+  personajes:
+    is_final_dir: false
+    go_back: true
+    contents:
+      tier_S:
+        go_back: true
+        is_final_dir: true
+        readme: "xxx"
+      tier_A:
+        go_back: true
+        is_final_dir: true
+        readme: "xxx"
+      tier_B:
+        go_back: true
+        is_final_dir: true
+        readme: "xxx"
+      banlist:
+        go_back: true
+        is_final_dir: true
+        readme: "Barry is here\n\n{img:barry_fake.jpg}"
