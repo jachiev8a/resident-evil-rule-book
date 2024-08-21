@@ -1,9 +1,8 @@
-# Resident-Evil Rule-Book
+# Resident Evil Ruleset
 
 ---
 
-## Contenido
-- ### [SETUP INICIAL](/00_setup/README.md)
-- ### [PERSONAJES y TIERS](/10_personajes/README.md)
-- ### [REGLAS ESPECIFICAS DE MANSION](#reglas-especificas-de-mansion)
-
+- ### [SETUP INICIAL](00_setup_inicial/README.md)
+- ### [PERSONAJES & TIERS](10_personajes_&_tiers/README.md)
+- ### [ARMAS](20_armas/README.md)
+- ### [REGLAS DE MANSION](30_mansion/README.md)

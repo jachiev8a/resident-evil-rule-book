@@ -1,12 +1,14 @@
 
 ---
 
-## [<- ATRAS](../README.md)
+### [<- ATRAS](../README.md)
 
 ---
 
 
-CONTENIDO:
+
+### Setup Inicial
+
 
 - ### [TANDA 1](00_tanda_1/README.md)
 - ### [TANDA 2](10_tanda_2/README.md)

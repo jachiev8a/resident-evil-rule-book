@@ -7,30 +7,50 @@ MAIN_CONFIG_DATA = get_config_data()
 
 
 TEMPLATE_HORIZONTAL_LINE = "---\n\n"
-TEMPLATE_GO_BACK = "## [<- ATRAS](../README.md)"
+TEMPLATE_GO_BACK = "### [<- ATRAS](../README.md)"
 
 REGEX_README_RESOURCE = re.compile(r'{(\w*):([\w.]*)}')
 
 
-class ConfigNodeBaseClass:
+class ConfigNode:
 
     MAIN_PROJECT_PATH = MAIN_PROJECT_DIR
 
-    def __init__(self, node_name: str, config_data: dict, index: int = 0):
+    def __init__(
+        self,
+        node_name: str,
+        config_data: dict,
+        parent_node_dir: str = None,
+        index: int = 0
+    ):
+        self._node_config = config_data
         self.index = index
         self.node_name = node_name
-        self.node_name_human_readable = (node_name[0].upper() + node_name[1:]).replace('_', ' ')
+        self.node_title = self._get_node_title()
         self.go_back = config_data.get("go_back")
-        self.is_final_dir = config_data.get("is_final_dir")
         self.readme = config_data.get("readme", None)
-        self.directory_path = f"{self.MAIN_PROJECT_PATH}/{self.index}0_{self.node_name}"
-        self.relative_path = self.directory_path.replace(f"{self.MAIN_PROJECT_PATH}/", '')
-        self.contents = {}
+        self.node_dir_path = f"{self.MAIN_PROJECT_PATH}/{self.index}0_{self.node_name}"
+        self.relative_path = self.node_dir_path.replace(f"{self.MAIN_PROJECT_PATH}/", '')
+        self.parent_node_dir = parent_node_dir
+        self.contents = config_data.get("contents", {})
+        self.table_of_contents = []
+
+        if self.parent_node_dir:
+            self.node_dir_path = f"{self.parent_node_dir}/{self.index}0_{self.node_name}"
+            self.relative_path = self.node_dir_path.replace(f"{self.parent_node_dir}/", '')
+
+        # parse readme content looking for special keywords
         self._parse_readme_content()
+
+    def _get_node_title(self):
+        node_title = self._node_config.get("title")
+        if not node_title:
+            node_title = (self.node_name[0].upper() + self.node_name[1:]).replace('_', ' ')
+        return node_title
 
     def _get_img_resource_path(self, img_resource_name: str):
         return (
-            "![alt text]"
+            f"![alt {img_resource_name}]"
             "(https://github.com/jachiev8a/resident-evil-rule-book/blob/"
             f"master/_python/img/{img_resource_name}?raw=true)"
         )
@@ -58,81 +78,76 @@ class ConfigNodeBaseClass:
             f"\n"
         )
 
-    def generate(self):
-        raise NotImplementedError
-
     def generate_readme(self):
-        with open(f"{self.directory_path}/README.md", "w") as f:
+        with open(f"{self.node_dir_path}/README.md", "w") as f:
             if self.go_back:
                 f.write(self._get_go_back_template())
-            if self.is_final_dir:
-                f.write(f"\n## {self.node_name_human_readable}\n\n")
+            f.write(f"\n### {self.node_title}\n\n")
             f.write(f"{self.readme}\n\n")
 
-
-class ConfigParentNode(ConfigNodeBaseClass):
-    def __init__(self, node_name: str, config_data: dict, index: int = 0):
-        super().__init__(node_name, config_data, index)
-        self.contents = config_data.get("contents")
-        self.table_of_contents = []
+    def generate_title(self):
+        if self.node_title:
+            self.readme = self.readme + f"### {self.node_title}\n\n"
 
     def generate_table_of_contents(self):
         if self.table_of_contents:
-            self.readme = self.readme + 'CONTENIDO:\n\n'
+            self.readme = self.readme + '\n'
             self.readme = self.readme + ''.join(self.table_of_contents)
 
-
     def generate(self):
-        print(f"Generating {self.node_name} directory...")
-        os.makedirs(self.directory_path, exist_ok=True)
-        for index, (child_node_name, child_node_data) in enumerate(self.contents.items()):
-            config_child_node = ConfigChildNode(
-                node_name=child_node_name,
-                config_data=child_node_data,
-                parent_dir=self.directory_path,
-                index=index,
-            )
-            config_child_node.generate()
-            self.table_of_contents.append(
-                f"- ### [{config_child_node.node_name_human_readable.upper()}]"
-                f"({config_child_node.relative_path}/README.md)\n"
-            )
+        os.makedirs(self.node_dir_path, exist_ok=True)
+        # if node has contents, generate child nodes for it (recursively)
+        if self.contents:
+            print(f"> Generating Config Parent Node [{self.node_name}] directory...")
+            for index, (child_node_name, child_node_data) in enumerate(self.contents.items()):
+                config_node = ConfigNode(
+                    node_name=child_node_name,
+                    config_data=child_node_data,
+                    parent_node_dir=self.node_dir_path,
+                    index=index,
+                )
+                config_node.generate()
+                self.table_of_contents.append(
+                    f"- ### [{config_node.node_title.upper()}]"
+                    f"({config_node.relative_path}/README.md)\n"
+                )
+        else:
+            print(f">>> Generating Config Child Node [{self.node_name}] directory...")
         self.generate_table_of_contents()
         self.generate_readme()
 
 
-class ConfigChildNode(ConfigNodeBaseClass):
+class ConfigGenerator:
+    def __init__(self, configuration: dict):
+        self.add_index_numbers = configuration.get("add_index_numbers")
+        self.main_title = configuration.get("main_title")
+        self.structure = configuration.get("structure")
+        self.table_of_contents = []
 
-    def __init__(self, node_name: str, config_data: dict, parent_dir: str, index: int = 0):
-        super().__init__(node_name, config_data, index)
-        self.parent_dir = parent_dir
-        self.directory_path = f"{self.parent_dir}/{self.index}0_{self.node_name}"
-        self.relative_path = self.directory_path.replace(f"{self.parent_dir}/", '')
-
-    def generate(self):
-        print(f"Generating [{self.node_name}] directory...")
-        os.makedirs(self.directory_path, exist_ok=True)
-        self.generate_readme()
-
-
-class MainStructure:
-    def __init__(self, structure: dict):
-        self.structure = structure
+    def generate_table_of_contents(self):
+        with open(f"{MAIN_PROJECT_DIR}/README.md", "w") as f:
+            f.write(f"# {self.main_title}\n\n")
+            f.write(f"{TEMPLATE_HORIZONTAL_LINE}")
+            f.write("".join(self.table_of_contents))
 
     def generate(self):
-        for index, (directory_name, configuration) in enumerate(self.structure.items()):
-            config_parent_node = ConfigParentNode(
-                node_name=directory_name,
+        for index, (node_name, configuration) in enumerate(self.structure.items()):
+            config_node = ConfigNode(
+                node_name=node_name,
                 config_data=configuration,
                 index=index,
             )
-            config_parent_node.generate()
+            self.table_of_contents.append(
+                f"- ### [{config_node.node_title.upper()}]"
+                f"({config_node.relative_path}/README.md)\n"
+            )
+            config_node.generate()
+        self.generate_table_of_contents()
 
 
 def main():
-    main_structure = MAIN_CONFIG_DATA.get("structure")
-    main_structure_instance = MainStructure(main_structure)
-    main_structure_instance.generate()
+    config_generator = ConfigGenerator(configuration=MAIN_CONFIG_DATA)
+    config_generator.generate()
 
 
 # ============================================================

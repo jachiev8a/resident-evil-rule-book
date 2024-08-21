@@ -1,12 +1,14 @@
 
 ---
 
-## [<- ATRAS](../README.md)
+### [<- ATRAS](../README.md)
 
 ---
 
 
-CONTENIDO:
+
+### Personajes & Tiers
+
 
 - ### [TIER S](00_tier_S/README.md)
 - ### [TIER A](10_tier_A/README.md)

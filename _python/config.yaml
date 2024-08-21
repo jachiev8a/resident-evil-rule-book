@@ -1,45 +1,63 @@
+# Main attributes for the main README
 add_index_numbers: true
+main_title: "Resident Evil Ruleset"
 
 # main structure node. [!] DON'T CHANGE THIS NAME
 # just add your own structure inside this node.
 structure:
 
   # [main: setup]
-  setup:
-    is_final_dir: false
+  setup_inicial:
+    title: "Setup Inicial"
     go_back: true
     contents:
       tanda_1:
         go_back: true
-        is_final_dir: true
         readme: "t1"
       tanda_2:
         go_back: true
-        is_final_dir: true
         readme: "t2"
       tanda_3:
         go_back: true
-        is_final_dir: true
         readme: "t3"
 
   # [main: personajes]
-  personajes:
-    is_final_dir: false
+  personajes_&_tiers:
+    title: "Personajes & Tiers"
     go_back: true
     contents:
       tier_S:
         go_back: true
-        is_final_dir: true
         readme: "t s"
       tier_A:
         go_back: true
-        is_final_dir: true
         readme: "t a"
       tier_B:
         go_back: true
-        is_final_dir: true
         readme: "t b"
       banlist:
         go_back: true
-        is_final_dir: true
         readme: "Barry is here\n\n{img:barry_fake.jpg}"
+
+  # [main: armas]
+  armas:
+    title: "Armas"
+    go_back: true
+    contents:
+      limited:
+        go_back: true
+        readme: "armas limitadas"
+
+  # [main: mansion]
+  mansion:
+    title: "Reglas de Mansion"
+    go_back: true
+    contents:
+      specific_rules:
+        title: "Reglas Especificas de Monstruos"
+        go_back: true
+        contents:
+          grillo:
+            go_back: true
+            readme: "grillo"
+
