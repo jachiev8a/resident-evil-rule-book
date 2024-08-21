@@ -13,14 +13,17 @@ structure:
     contents:
       # [sub]
       tanda_1:
+        title: "Tanda 1"
         go_back: true
         readme: "t1"
       # [sub]
       tanda_2:
+        title: "Tanda 2 - (8 cds)"
         go_back: true
         readme: "t2"
       # [sub]
       tanda_3:
+        title: "Tanda 3 - (15 cds)"
         go_back: true
         readme: "t3"
 

@@ -7,7 +7,7 @@
 
 
 
-### Tanda 3
+### Tanda 3 - (15 cds)
 
 t3
 
