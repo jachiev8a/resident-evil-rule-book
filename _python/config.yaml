@@ -95,8 +95,8 @@ structure:
     title: "Discusiones"
     go_back: true
     contents:
-    # [sub]
-    infection_level:
-      title: "Nivel de Infeccion 3 o 4"
-      go_back: true
-      readme: ""
+      # [sub]
+      infection_level:
+        title: "Nivel de Infeccion 3 o 4"
+        go_back: true
+        readme: ""
