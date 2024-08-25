@@ -60,16 +60,23 @@ class ConfigNode:
             self.readme = ""
             return
 
-        resource_type = None
-        resource_name = None
-        match = re.search(REGEX_README_RESOURCE, self.readme)
-        if match:
-            resource_type = match.group(1)
-            resource_name = match.group(2)
+        all_matches = re.findall(REGEX_README_RESOURCE, self.readme)
 
-        if resource_type == 'img':
-            img_resource_path = self._get_img_resource_path(resource_name)
-            self.readme = re.sub(REGEX_README_RESOURCE, img_resource_path, self.readme)
+        for _ in all_matches:
+            # iterate over all matches and replace them with resource path
+            match = re.search(REGEX_README_RESOURCE, self.readme)
+            if match:
+                resource_type = match.group(1)
+                resource_name = match.group(2)
+            else:
+                # no more matches were found. Break infinite loop
+                break
+
+            if resource_type == 'img':
+                img_resource_path = self._get_img_resource_path(resource_name)
+                # replace first occurrence of resource with img resource path
+                # TODO: this may need a refactor since we always think first occurrence is always in order
+                self.readme = re.sub(REGEX_README_RESOURCE, img_resource_path, self.readme, count=1)
         # replace '\\n' with new line
         self.readme = self.readme.replace('\\n', '\n')
 
