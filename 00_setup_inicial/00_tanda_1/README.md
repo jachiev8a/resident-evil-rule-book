@@ -7,7 +7,7 @@
 
 
 
-### Tanda 1 (Inicial)
+### Tanda 1 - (Inicial)
 
 
 > #### ITEMS

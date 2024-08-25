@@ -9,7 +9,7 @@
 
 ### Tanda 3 - (15 cds)
 
-> **TANDA 3** - 1er jugador en 15 CONDECORACIONES
+> **DESBLOQUEO:** 1er jugador en **15 CONDECORACIONES**
 
 ![alt setup_tanda_3_all.jpg](https://github.com/jachiev8a/resident-evil-rule-book/blob/master/_python/img/setup_tanda_3_all.jpg?raw=true)
 

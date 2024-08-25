@@ -7,10 +7,10 @@
 
 
 
-### Tanda de Premios Mansion
+### Tanda de Premios de Mansion
 
-> **TANDA DE PREMIOS MANSION.**
-Solo disponible si eliminas 1 monstruo de la mansion de alto nivel.
+> **DESBLOQUEO:** Solo disponible para comprar para el jugador que logre
+eliminar 1 monstruo de la mansion de alto nivel.
 
 ![alt mansion_rewards.jpg](https://github.com/jachiev8a/resident-evil-rule-book/blob/master/_python/img/mansion_rewards.jpg?raw=true)
 

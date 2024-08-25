@@ -13,7 +13,7 @@ structure:
     contents:
       # [sub]
       tanda_1:
-        title: "Tanda 1 (Inicial)"
+        title: "Tanda 1 - (Inicial)"
         go_back: true
         readme: |
           \n> #### ITEMS\n
@@ -25,7 +25,7 @@ structure:
         title: "Tanda 2 - (8 cds)"
         go_back: true
         readme: |
-          > **TANDA 2** - 1er jugador en 8 CONDECORACIONES\n
+          > **DESBLOQUEO:** 1er jugador en **8 CONDECORACIONES**\n
           {img:setup_tanda_2_all.jpg}
           \n---\n
           > **ITEMS**\n
@@ -38,7 +38,7 @@ structure:
         title: "Tanda 3 - (15 cds)"
         go_back: true
         readme: |
-          > **TANDA 3** - 1er jugador en 15 CONDECORACIONES\n
+          > **DESBLOQUEO:** 1er jugador en **15 CONDECORACIONES**\n
           {img:setup_tanda_3_all.jpg}
           \n---\n
           > #### VISTA ITEMS\n
@@ -48,17 +48,21 @@ structure:
           {img:setup_tanda_3_limited.jpg}
       # [sub]
       tanda_de_premios_mansion:
-        title: "Tanda de Premios Mansion"
+        title: "Tanda de Premios de Mansion"
         go_back: true
         readme: |
-          > **TANDA DE PREMIOS MANSION.**
-          Solo disponible si eliminas 1 monstruo de la mansion de alto nivel.\n
+          > **DESBLOQUEO:** Solo disponible para comprar para el jugador que logre
+          eliminar 1 monstruo de la mansion de alto nivel.\n
           {img:mansion_rewards.jpg}
       # [sub]
-      mano_inicial:
-        title: "Mano Inicial"
+      deck_inicial:
+        title: "Deck Inicial"
         go_back: true
-        readme: ""
+        readme: |
+          - #### (x7) 10 Ammo
+          - #### (x2) cuchillos
+          - #### (x1) pistola
+          
 
   # [main: personajes]
   personajes_&_tiers:
