@@ -26,6 +26,11 @@ structure:
         title: "Tanda 3 - (15 cds)"
         go_back: true
         readme: "t3"
+      # [sub]
+      mano_inicial:
+        title: "Mano Inicial"
+        go_back: true
+        readme: ""
 
   # [main: personajes]
   personajes_&_tiers:
@@ -39,11 +44,17 @@ structure:
       # [sub]
       tier_A:
         go_back: true
-        readme: "t a"
+        readme: "{img:char_tier_a_list.jpg}"
       # [sub]
       tier_B:
         go_back: true
-        readme: "t b"
+        readme: |
+          {img:char_tier_b_list.jpg}
+          \n---\n
+          > Vista particionada\n
+          {img:char_tier_b_part1.jpg}\n
+          {img:char_tier_b_part2.jpg}\n
+          {img:char_tier_b_part3.jpg}
       # [sub]
       banlist:
         go_back: true
@@ -61,6 +72,16 @@ structure:
       limited:
         go_back: true
         readme: "armas limitadas"
+
+  # [main: actions]
+  actions:
+    title: "Actions"
+    go_back: true
+    contents:
+      # [sub]
+      limited:
+        go_back: true
+        readme: "acciones limitadas"
 
   # [main: mansion]
   mansion:
